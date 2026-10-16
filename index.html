@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>João Catarino &mdash; Obra</title>
+<meta name="description" content="Catálogo de obra de João Catarino: pintura, obra sobre papel e objeto. Obras disponíveis e obras já vendidas.">
+<style>
+[hidden]{display:none !important}
+.grupo.sub .rot{opacity:.75}
+.grupo.sub{padding-left:14px}
+
+.bio{display:flex;gap:1.4rem;align-items:flex-start}
+.bio .retrato{width:132px;height:auto;border-radius:3px;flex:0 0 auto;
+  box-shadow:0 2px 10px rgba(0,0,0,.18)}
+@media(max-width:640px){.bio{flex-direction:column}.bio .retrato{width:104px}}
+.fotos{display:flex;flex-direction:column;background:#14120f;min-width:0}
+.fotos #fotoGrande{flex:1 1 auto;min-height:0}
+.tiras{display:flex;gap:.5rem;padding:.6rem;flex-wrap:wrap;justify-content:center;background:#14120f}
+.tiras .tira{width:74px;height:74px;object-fit:cover;border-radius:2px;cursor:pointer;
+  opacity:.55;transition:opacity .15s;border:1px solid rgba(0,0,0,.12)}
+.tiras .tira:hover{opacity:.85}
+.tiras .tira.sel{opacity:1;outline:2px solid #333;outline-offset:1px}
+
+:root{--tinta:#1c1a17;--suave:#6d675f;--fundo:#f7f5f1;--carta:#fff;--linha:#e3ded6;--realce:#8a3b2a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fundo);color:var(--tinta);
+ font:16px/1.6 "Iowan Old Style",Palatino,"Palatino Linotype",Georgia,serif}
+a{color:inherit}
+.env{max-width:1240px;margin:0 auto;padding:0 24px}
+header{padding:64px 0 28px;border-bottom:1px solid var(--linha)}
+h1{font-size:clamp(34px,6vw,56px);margin:0;letter-spacing:-.02em;font-weight:500}
+.sub{color:var(--suave);margin:10px 0 0;font-size:17px}
+.bio{margin:26px 0 0;max-width:62ch;color:#3a3630}
+.bio p{margin:0 0 12px}
+nav.filtros{position:sticky;top:0;z-index:20;background:rgba(247,245,241,.94);
+ backdrop-filter:blur(8px);border-bottom:1px solid var(--linha);padding:14px 0;margin-bottom:34px}
+.grupo{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.grupo+.grupo{margin-top:10px}
+.rot{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--suave);margin-right:6px}
+button.f{font:inherit;font-size:14px;background:var(--carta);border:1px solid var(--linha);
+ color:var(--tinta);padding:6px 14px;border-radius:999px;cursor:pointer}
+button.f:hover{border-color:var(--suave)}
+button.f[aria-pressed="true"]{background:var(--tinta);color:#fff;border-color:var(--tinta)}
+.contagem{margin:0 0 20px;color:var(--suave);font-size:14px}
+.texto-col{margin:0 0 18px;max-width:62ch}
+.texto-col h2{font-size:22px;font-weight:500;margin:0 0 6px}
+.texto-col p{margin:0;color:#3a3630}
+.indice{margin:34px 0 6px}
+.indice h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--suave);
+ font-weight:400;margin:0 0 14px}
+.indice ol{list-style:none;margin:0;padding:0;display:grid;
+ grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:2px 28px}
+.indice li{border-top:1px solid var(--linha)}
+.indice button{width:100%;display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+ background:none;border:none;font:inherit;color:inherit;text-align:left;padding:11px 2px;cursor:pointer}
+.indice button:hover{color:var(--realce)}
+.indice .qt{font-size:13px;color:var(--suave);white-space:nowrap}
+.indice .qt b{font-weight:600;color:var(--tinta)}
+.grelha{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:30px 26px;padding-bottom:70px}
+.obra{background:var(--carta);border:1px solid var(--linha);border-radius:3px;overflow:hidden;
+ display:flex;flex-direction:column;cursor:pointer;transition:box-shadow .2s,transform .2s}
+.obra:hover{box-shadow:0 14px 34px rgba(28,26,23,.13);transform:translateY(-2px)}
+.moldura{aspect-ratio:1/1;background:#eae6df;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.moldura img{width:100%;height:100%;object-fit:contain;display:block}
+.semfoto{color:#b4ada2;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.corpo{padding:16px 18px 18px;display:flex;flex-direction:column;gap:5px;flex:1}
+.tit{font-size:19px;margin:0;font-weight:500}
+.tit.st,.info h2.st{font-style:italic;color:var(--suave)}
+.refobra{margin:2px 0 0;font-size:12px;color:#b4ada2;letter-spacing:.04em}
+.meta{font-size:13.5px;color:var(--suave);margin:0}
+.rodape{margin-top:auto;padding-top:12px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.preco{font-size:18px}
+.selo{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--realce);
+ border:1px solid var(--realce);padding:3px 9px;border-radius:999px;white-space:nowrap}
+.selo.disp{color:var(--suave);border-color:var(--linha)}
+.pedir{display:block;margin-top:12px;text-align:center;text-decoration:none;font-size:14px;
+ letter-spacing:.03em;padding:10px 12px;border:1px solid var(--tinta);border-radius:2px;
+ background:var(--tinta);color:#fff}
+.pedir:hover{background:#000}
+.pedir.sec{background:transparent;color:var(--tinta);border-color:var(--linha)}
+.ondevenda{display:block;margin-top:7px;text-align:center;font-size:12.5px;
+ text-decoration:none;color:var(--realce);letter-spacing:.02em}
+.ondevenda:hover{text-decoration:underline}
+.pedir.sec:hover{background:#f2efe9}
+.col{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#a9a298}
+.cta.sec{background:transparent;color:var(--tinta);border:1px solid var(--linha)}
+dialog{border:none;padding:0;max-width:min(1100px,94vw);width:100%;background:var(--carta);
+ border-radius:4px;color:var(--tinta);position:relative}
+dialog::backdrop{background:rgba(20,18,16,.82)}
+.jan{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(280px,1fr)}
+.jan img{width:100%;height:100%;max-height:82vh;object-fit:contain;background:#14120f;display:block}
+.info{padding:34px 32px;display:flex;flex-direction:column;gap:12px}
+.info h2{margin:0;font-size:29px;font-weight:500;line-height:1.2}
+.info dl{margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:7px 16px;font-size:14.5px}
+.info dt{color:var(--suave)}
+.info dd{margin:0}
+.nota{font-size:14px;color:#3a3630;border-left:2px solid var(--linha);padding-left:12px;margin:4px 0 0}
+.cta{margin-top:18px;display:inline-block;text-align:center;background:var(--tinta);color:#fff;
+ text-decoration:none;padding:13px 22px;border-radius:2px;font-size:15px;letter-spacing:.03em}
+.cta.fora{background:#efece6;color:var(--suave);pointer-events:none}
+.fechar{position:absolute;top:8px;right:12px;background:none;border:none;color:#fff;font-size:34px;
+ cursor:pointer;line-height:1;text-shadow:0 1px 6px rgba(0,0,0,.6)}
+footer{border-top:1px solid var(--linha);padding:34px 0 60px;color:var(--suave);font-size:14px}
+@media(max-width:820px){.jan{grid-template-columns:1fr}.jan img{max-height:52vh}.info{padding:24px}
+ .fechar{color:#fff}}
+</style>
+</head>
+<body>
+<header><div class="env">
+  <h1>João Catarino</h1>
+  <p class="sub">Pintura, obra sobre papel e objeto &middot; Coimbra, Portugal</p>
+  <div class="bio"><img class="retrato" src="imagens/web/artista.jpg" alt="João Catarino"><p>João Catarino é artista português, engenheiro civil e antigo docente universitário. A sua prática artística desenvolve-se entre a pintura, a experimentação com materiais e a construção de objetos, cruzando uma formação técnica ligada à estrutura com uma abordagem intuitiva, física e aberta ao acidente. O seu trabalho explora a relação entre ordem e desordem, geometria e gesto, matéria natural e intervenção humana. A cor, a textura, a repetição e a sobreposição funcionam como elementos de construção de imagens que oscilam entre o abstrato e referências reconhecíveis — a paisagem, a cidade e o mundo orgânico. Desenvolve atualmente o seu trabalho em Coimbra, onde mantém uma prática regular de criação e apresentação pública da sua obra.</p></div>
+</div></header>
+
+<nav class="filtros"><div class="env">
+  <div class="grupo"><span class="rot">Mostrar</span><button class="f" data-grupo="estado" data-v="todas" aria-pressed="true">Todas</button><button class="f" data-grupo="estado" data-v="disponivel" aria-pressed="false">À venda</button><button class="f" data-grupo="estado" data-v="fora" aria-pressed="false">Fora de venda</button></div>
+  <div class="grupo" id="fTemaLinha" hidden><span class="rot">Temas</span><span id="fTemaBotoes"></span></div>
+  <div class="grupo sub" id="fSubLinha" hidden><span class="rot" id="fSubRot">Dentro de</span><span id="fSubBotoes"></span></div>
+  <div class="grupo" id="fTecLinha" hidden><span class="rot">Técnica</span><span id="fTecBotoes"></span></div>
+  <div class="grupo sub" id="fTecSubLinha" hidden><span class="rot">Sobre</span><span id="fTecSubBotoes"></span></div>
+</div></nav>
+
+<main class="env">
+  <p class="contagem" id="contagem"></p>
+  <div class="grelha" id="grelha"></div>
+</main>
+
+<dialog id="lb">
+  <div class="jan" id="jan"></div>
+  <button class="fechar" id="fechar" aria-label="Fechar">&times;</button>
+</dialog>
+
+<footer><div class="env">
+  <p>Para aquisição ou informações: <a href="mailto:jc@centralprojectos.pt">jc@centralprojectos.pt</a>
+  &middot; <a href="https://www.facebook.com/joao.catarino.33821" target="_blank" rel="noopener">Facebook</a></p>
+  <p>As obras assinaladas como vendidas ou oferecidas mantêm-se em catálogo, sem indicação de preço.
+  Valores em euros, sem IVA.</p>
+</div></footer>
+
+<script>const DADOS={"artista": {"nome": "João Catarino", "local": "Coimbra, Portugal", "email": "jc@centralprojectos.pt", "facebook": "https://www.facebook.com/joao.catarino.33821", "nota_biografica": "João Catarino é artista português, engenheiro civil e antigo docente universitário. A sua prática artística desenvolve-se entre a pintura, a experimentação com materiais e a construção de objetos, cruzando uma formação técnica ligada à estrutura com uma abordagem intuitiva, física e aberta ao acidente. O seu trabalho explora a relação entre ordem e desordem, geometria e gesto, matéria natural e intervenção humana. A cor, a textura, a repetição e a sobreposição funcionam como elementos de construção de imagens que oscilam entre o abstrato e referências reconhecíveis — a paisagem, a cidade e o mundo orgânico. Desenvolve atualmente o seu trabalho em Coimbra, onde mantém uma prática regular de criação e apresentação pública da sua obra."}, "obras": [{"ref": "obra-01", "titulo": "Ó Coruja", "ano": 2025, "categoria": "Obra sobre papel", "tecnica": "Acrílico e aguarela sobre cartolina", "suporte": "Cartolina", "dimensoes": "40 × 50 × 3 cm", "estado": "disponivel", "coleccao": "Obra em papel 2024-2026", "destaque": false, "notas": "Assinada à frente · Emoldurada · Original único · Pronta a pendurar.", "temas": ["Animais", "Aves"], "venda_em": ["Saatchi Art", "Site próprio", "Artbid"], "venda_link": "Artbid, lote 268461 — em avaliação desde 12-10-2026", "_tec": {"meio": ["Acrílico", "Aguarela"], "suporte": "Cartolina"}, "_web": {"g": "imagens/web/obra-01-g.jpg", "m": "imagens/web/obra-01-m.jpg", "mais": [{"g": "imagens/web/obra-01-f1-g.jpg", "m": "imagens/web/obra-01-f1-m.jpg"}, {"g": "imagens/web/obra-01-f2-g.jpg", "m": "imagens/web/obra-01-f2-m.jpg"}, {"g": "imagens/web/obra-01-f3-g.jpg", "m": "imagens/web/obra-01-f3-m.jpg"}]}, "preco": 140}, {"ref": "danca-classica-02", "titulo": "Dança Clássica", "ano": 2025, "categoria": "Desenho", "tecnica": "Técnica mista sobre cartolina", "suporte": "Cartolina", "dimensoes": "50 × 40 × 3 cm", "estado": "disponivel", "coleccao": "Obra em papel 2024-2026", "destaque": false, "notas": "Assinada à frente · Emoldurada · Original único · Pronta a pendurar.", "temas": ["Pessoas", "Dança", "Preto e Branco"], "venda_em": ["Saatchi Art", "Site próprio", "Artbid"], "venda_link": "Artbid, lote 268463 — em avaliação desde 12-10-2026", "_tec": {"meio": ["Técnica mista"], "suporte": "Cartolina"}, "_web": {"g": "imagens/web/danca-classica-02-g.jpg", "m": "imagens/web/danca-classica-02-m.jpg", "mais": [{"g": "imagens/web/danca-classica-02-f1-g.jpg", "m": "imagens/web/danca-classica-02-f1-m.jpg"}, {"g": "imagens/web/danca-classica-02-f2-g.jpg", "m": "imagens/web/danca-classica-02-f2-m.jpg"}, {"g": "imagens/web/danca-classica-02-f3-g.jpg", "m": "imagens/web/danca-classica-02-f3-m.jpg"}]}, "preco": 140}, {"ref": "mulher-fogo-03", "titulo": "Mulher Fogo", "ano": 2026, "categoria": "Gravura / monoprint", "tecnica": "Técnica mista sobre cartolina", "suporte": "Cartolina", "dimensoes": "50 × 40 × 3 cm", "estado": "disponivel", "coleccao": "Obra em papel 2024-2026", "destaque": false, "notas": "Assinada à frente · Emoldurada · Original único · Pronta a pendurar. A confirmar: categoria: além de «Obra sobre papel», li «Gravura/monoprint» e «Colagem»", "temas": ["Pessoas", "Nus"], "venda_em": ["Saatchi Art", "Site próprio", "Artbid"], "venda_link": "Artbid, lote 268467 — em avaliação desde 12-10-2026", "_tec": {"meio": ["Técnica mista"], "suporte": "Cartolina"}, "_web": {"g": "imagens/web/mulher-fogo-03-g.jpg", "m": "imagens/web/mulher-fogo-03-m.jpg", "mais": [{"g": "imagens/web/mulher-fogo-03-f1-g.jpg", "m": "imagens/web/mulher-fogo-03-f1-m.jpg"}, {"g": "imagens/web/mulher-fogo-03-f2-g.jpg", "m": "imagens/web/mulher-fogo-03-f2-m.jpg"}, {"g": "imagens/web/mulher-fogo-03-f3-g.jpg", "m": "imagens/web/mulher-fogo-03-f3-m.jpg"}]}, "preco": 140}, {"ref": "as-raizes-04", "titulo": "As Raízes", "ano": 2026, "categoria": "Obra sobre papel", "tecnica": "Acrílico e aguarela sobre cartolina", "suporte": "Cartolina", "dimensoes": "50 × 40 × 3 cm", "estado": "disponivel", "coleccao": "Obra em papel 2024-2026", "destaque": false, "notas": "Assinada à frente · Emoldurada · Original único · Pronta a pendurar.", "temas": ["Abstrato", "Natureza", "Cor"], "venda_em": ["Saatchi Art", "Site próprio", "Artbid"], "venda_link": "Artbid, lote 268468 — em avaliação desde 12-10-2026", "_tec": {"meio": ["Acrílico", "Aguarela"], "suporte": "Cartolina"}, "_web": {"g": "imagens/web/as-raizes-04-g.jpg", "m": "imagens/web/as-raizes-04-m.jpg", "mais": [{"g": "imagens/web/as-raizes-04-f1-g.jpg", "m": "imagens/web/as-raizes-04-f1-m.jpg"}, {"g": "imagens/web/as-raizes-04-f2-g.jpg", "m": "imagens/web/as-raizes-04-f2-m.jpg"}, {"g": "imagens/web/as-raizes-04-f3-g.jpg", "m": "imagens/web/as-raizes-04-f3-m.jpg"}]}, "preco": 120}, {"ref": "baloes-de-festa-05", "titulo": "Balões de Festa", "ano": 2026, "categoria": "Obra sobre papel", "tecnica": "Acrílico e técnica mista sobre cartolina", "suporte": "Cartolina", "dimensoes": "40 × 50 × 3 cm", "estado": "disponivel", "coleccao": "Obra em papel 2024-2026", "destaque": false, "notas": "Assinada à frente · Emoldurada · Original único · Pronta a pendurar.", "temas": ["Abstrato", "Cor"], "venda_em": ["Saatchi Art", "Site próprio", "Artbid"], "venda_link": "Artbid, lote 268470 — em avaliação desde 12-10-2026", "_tec": {"meio": ["Acrílico", "Técnica mista"], "suporte": "Cartolina"}, "_web": {"g": "imagens/web/baloes-de-festa-05-g.jpg", "m": "imagens/web/baloes-de-festa-05-m.jpg", "mais": [{"g": "imagens/web/baloes-de-festa-05-f1-g.jpg", "m": "imagens/web/baloes-de-festa-05-f1-m.jpg"}, {"g": "imagens/web/baloes-de-festa-05-f2-g.jpg", "m": "imagens/web/baloes-de-festa-05-f2-m.jpg"}, {"g": "imagens/web/baloes-de-festa-05-f3-g.jpg", "m": "imagens/web/baloes-de-festa-05-f3-m.jpg"}]}, "preco": 120}, {"ref": "mulher-sentada-06", "titulo": "Mulher Sentada", "ano": 2024, "categoria": "Desenho", "tecnica": "Lápis sobre cartolina", "suporte": "Cartolina", "dimensoes": "50 × 40 × 3 cm", "estado": "disponivel", "coleccao": "Obra em papel 2024-2026", "destaque": false, "notas": "Assinada à frente · Emoldurada · Original único · Pronta a pendurar.", "temas": ["Pessoas", "Nus"], "venda_em": ["Saatchi Art", "Site próprio", "Artbid"], "venda_link": "https://artbid.pt/pt/lote/259478-joao-catarino-1964", "_tec": {"meio": ["Lápis"], "suporte": "Cartolina"}, "_web": {"g": "imagens/web/mulher-sentada-06-g.jpg", "m": "imagens/web/mulher-sentada-06-m.jpg", "mais": [{"g": "imagens/web/mulher-sentada-06-f1-g.jpg", "m": "imagens/web/mulher-sentada-06-f1-m.jpg"}, {"g": "imagens/web/mulher-sentada-06-f2-g.jpg", "m": "imagens/web/mulher-sentada-06-f2-m.jpg"}, {"g": "imagens/web/mulher-sentada-06-f3-g.jpg", "m": "imagens/web/mulher-sentada-06-f3-m.jpg"}]}, "preco": 140}, {"ref": "azul-dourado-07", "titulo": "Azul Dourado", "ano": 2025, "categoria": "Obra sobre papel", "tecnica": "Técnica mista sobre cartolina", "suporte": "Cartolina", "dimensoes": "50 × 40 × 3 cm", "estado": "disponivel", "coleccao": "Obra em papel 2024-2026", "destaque": false, "notas": "Assinada à frente · Emoldurada · Original único · Pronta a pendurar.", "temas": ["Abstrato", "Cor"], "venda_em": ["Saatchi Art", "Site próprio", "Artbid"], "venda_link": "Artbid, lote 268471 — em avaliação desde 12-10-2026", "_tec": {"meio": ["Técnica mista"], "suporte": "Cartolina"}, "_web": {"g": "imagens/web/azul-dourado-07-g.jpg", "m": "imagens/web/azul-dourado-07-m.jpg", "mais": [{"g": "imagens/web/azul-dourado-07-f1-g.jpg", "m": "imagens/web/azul-dourado-07-f1-m.jpg"}, {"g": "imagens/web/azul-dourado-07-f2-g.jpg", "m": "imagens/web/azul-dourado-07-f2-m.jpg"}, {"g": "imagens/web/azul-dourado-07-f3-g.jpg", "m": "imagens/web/azul-dourado-07-f3-m.jpg"}]}, "preco": 140}, {"ref": "organico-08", "titulo": "Orgânico", "ano": 2026, "categoria": "Obra sobre papel", "tecnica": "Aguarela sobre cartolina", "suporte": "Cartolina", "dimensoes": "50 × 40 × 3 cm", "estado": "disponivel", "coleccao": "Obra em papel 2024-2026", "destaque": false, "notas": "Assinada à frente · Emoldurada · Original único · Pronta a pendurar.", "temas": ["Abstrato", "Natureza", "Plantas"], "venda_em": ["Saatchi Art", "Site próprio", "Artbid"], "venda_link": "https://artbid.pt/pt/lote/259479-joao-catarino-1964", "_tec": {"meio": ["Aguarela"], "suporte": "Cartolina"}, "_web": {"g": "imagens/web/organico-08-g.jpg", "m": "imagens/web/organico-08-m.jpg", "mais": [{"g": "imagens/web/organico-08-f1-g.jpg", "m": "imagens/web/organico-08-f1-m.jpg"}, {"g": "imagens/web/organico-08-f2-g.jpg", "m": "imagens/web/organico-08-f2-m.jpg"}, {"g": "imagens/web/organico-08-f3-g.jpg", "m": "imagens/web/organico-08-f3-m.jpg"}]}, "preco": 120}, {"ref": "vento-e-ondas-09", "titulo": "Vento e Ondas", "ano": 2025, "categoria": "Obra sobre papel", "tecnica": "Técnica mista sobre cartolina", "suporte": "Cartolina", "dimensoes": "50 × 40 × 3 cm", "estado": "disponivel", "coleccao": "Obra em papel 2024-2026", "destaque": false, "notas": "Assinada à frente · Emoldurada · Original único · Pronta a pendurar.", "temas": ["Abstrato", "Mar", "Cor"], "venda_em": ["Saatchi Art", "Site próprio", "Artbid"], "venda_link": "Artbid, lote 268474 — em avaliação desde 12-10-2026", "_tec": {"meio": ["Técnica mista"], "suporte": "Cartolina"}, "_web": {"g": "imagens/web/vento-e-ondas-09-g.jpg", "m": "imagens/web/vento-e-ondas-09-m.jpg", "mais": [{"g": "imagens/web/vento-e-ondas-09-f1-g.jpg", "m": "imagens/web/vento-e-ondas-09-f1-m.jpg"}, {"g": "imagens/web/vento-e-ondas-09-f2-g.jpg", "m": "imagens/web/vento-e-ondas-09-f2-m.jpg"}, {"g": "imagens/web/vento-e-ondas-09-f3-g.jpg", "m": "imagens/web/vento-e-ondas-09-f3-m.jpg"}]}, "preco": 140}, {"ref": "a-floresta-ao-entardecer-10", "titulo": "A Floresta ao Entardecer", "ano": 2026, "categoria": "Obra sobre papel", "tecnica": "Acrílico sobre cartolina", "suporte": "Cartolina", "dimensoes": "50 × 40 × 3 cm", "estado": "disponivel", "coleccao": "Obra em papel 2024-2026", "destaque": false, "notas": "Assinada à frente · Emoldurada · Original único · Pronta a pendurar.", "temas": ["Abstrato", "Natureza", "Árvores", "Cor"], "venda_em": ["Saatchi Art", "Site próprio", "Artbid"], "venda_link": "Artbid, lote 268475 — em avaliação desde 12-10-2026", "_tec": {"meio": ["Acrílico"], "suporte": "Cartolina"}, "_web": {"g": "imagens/web/a-floresta-ao-entardecer-10-g.jpg", "m": "imagens/web/a-floresta-ao-entardecer-10-m.jpg", "mais": [{"g": "imagens/web/a-floresta-ao-entardecer-10-f1-g.jpg", "m": "imagens/web/a-floresta-ao-entardecer-10-f1-m.jpg"}, {"g": "imagens/web/a-floresta-ao-entardecer-10-f2-g.jpg", "m": "imagens/web/a-floresta-ao-entardecer-10-f2-m.jpg"}, {"g": "imagens/web/a-floresta-ao-entardecer-10-f3-g.jpg", "m": "imagens/web/a-floresta-ao-entardecer-10-f3-m.jpg"}]}, "preco": 120}, {"ref": "fb-113188619412649", "titulo": "Luz e Sombra", "ano": 2011, "categoria": "Pintura", "tecnica": "Acrílico sobre tela", "suporte": "Tela", "dimensoes": "90 × 155 cm", "estado": "nao_disponivel", "temas": ["Abstrato", "Preto e Branco"], "coleccao": "Arquivo 2011", "_tec": {"meio": ["Acrílico"], "suporte": "Tela"}, "_web": {"g": "imagens/web/fb-113188619412649-g.jpg", "m": "imagens/web/fb-113188619412649-m.jpg"}}, {"ref": "fb-130957434302434", "titulo": "A Ordem no Caos", "ano": 2011, "ano_publicacao": 2017, "categoria": "Arte digital", "tecnica": "Impressão sobre papel", "suporte": "Papel", "dimensoes": "29,7 × 42 cm", "estado": "nao_disponivel", "destaque": false, "coleccao": "Digital", "temas": ["Abstrato"], "_tec": {"meio": ["Impressão"], "suporte": "Papel"}, "_web": {"g": "imagens/web/fb-130957434302434-g.jpg", "m": "imagens/web/fb-130957434302434-m.jpg"}}, {"ref": "fb-156298928434951", "titulo": "O Primeiro Grito", "ano": 2011, "ano_publicacao": 2017, "categoria": "Pintura", "tecnica": "Pastel sobre papel", "suporte": "Papel", "dimensoes": "42 × 29,7 cm", "estado": "nao_disponivel", "destaque": false, "coleccao": "Pintura", "ano_fonte": "data da fotografia", "temas": ["Pessoas", "Nus", "Grito"], "_tec": {"meio": ["Pastel"], "suporte": "Papel"}, "_web": {"g": "imagens/web/fb-156298928434951-g.jpg", "m": "imagens/web/fb-156298928434951-m.jpg"}}, {"ref": "fb-156299171768260", "titulo": "Intimidades", "ano": 2011, "ano_publicacao": 2017, "categoria": "Pintura", "tecnica": "Pastel sobre papel", "suporte": "Papel", "dimensoes": "100 × 100 cm", "estado": "nao_disponivel", "destaque": false, "coleccao": "Pintura", "ano_fonte": "data da fotografia", "temas": ["Pessoas"], "_tec": {"meio": ["Pastel"], "suporte": "Papel"}, "_web": {"g": "imagens/web/fb-156299171768260-g.jpg", "m": "imagens/web/fb-156299171768260-m.jpg"}}, {"ref": "fb-545130362885137", "titulo": "Sombras", "ano": 2011, "ano_publicacao": 2017, "categoria": "Pintura", "tecnica": "Acrílico sobre tela", "suporte": "Tela", "dimensoes": "60 × 40 cm", "estado": "nao_disponivel", "destaque": false, "coleccao": "Pintura", "ano_fonte": "data da fotografia", "temas": ["Abstrato", "Geométrico", "Cor"], "_tec": {"meio": ["Acrílico"], "suporte": "Tela"}, "_web": {"g": "imagens/web/fb-545130362885137-g.jpg", "m": "imagens/web/fb-545130362885137-m.jpg"}}, {"ref": "fb-545130279551812", "titulo": "Verde e Castanho", "ano": 2011, "ano_publicacao": 2017, "categoria": "Pintura", "tecnica": "Acrílico sobre papel", "suporte": "Papel", "estado": "nao_disponivel", "destaque": false, "coleccao": "Pintura", "ano_fonte": "data da fotografia", "temas": ["Abstrato", "Cor"], "_tec": {"meio": ["Acrílico"], "suporte": "Papel"}, "_web": {"g": "imagens/web/fb-545130279551812-g.jpg", "m": "imagens/web/fb-545130279551812-m.jpg"}}], "coleccoes": {"Pintura sobre papel": "Estes são a 20 Euros para financiar o material para quadros novos. Acrílico sobre papel e por vezes também pastel e outras técnicas mistas.", "Fotografia": "Congelar o momento", "Pessoas": "Pessoas que encontrei no meu caminho. Um rosto conta uma história de vida.", "Digital": "Imagens digitais"}, "series": {"Aquilo que Cresce": "Pintura, obra sobre papel e objeto escultórico em torno de uma tensão essencial: a forma como a natureza cresce, resiste e se transforma perante as estruturas que o ser humano desenha, impõe e habita. A matéria natural ganha estrutura; a construção perde rigidez e torna-se quase orgânica."}, "arvore": [["Mar", []], ["Natureza", ["Árvores", "Plantas"]], ["Pessoas", ["Humano", "Nus", "Dança", "Autorretratos", "O Artista"]], ["Animais", ["Aves", "Galos e Galinhas", "Cavalos", "Gatos", "Elefantes", "Peixes", "Sardinhas"]], ["Cidades", ["Coimbra", "Pontes"]], ["Grito", []], ["Abstrato", []], ["Geométrico", []], ["Orgânico", []], ["Cartoons", []], ["Preto e Branco", []], ["Cor", []], ["Técnica", ["Acrílico", "Aguarela", "Técnica Mista", "Lápis", "Caneta", "Monoprint", "Corte em Papel", "Empastos", "Escultura", "Driftwood", "Vidro", "Arte Digital", "Fotoflorescentes", "Fotografia", "Cópias"]], ["Arquivo", ["Exposições", "Publicações", "Notícias", "Fotos Antigas"]]]};
+const OBRAS=DADOS.obras, ART=DADOS.artista;
+const TEXTOS=Object.assign({}, DADOS.series||{}, DADOS.coleccoes||{});
+let fEstado='todas', fTema='todos', fSub='todos', fTec='todas', fTecSub='todos';
+const ARVORE=DADOS.arvore||[];
+const FILHOS=Object.fromEntries(ARVORE.map(([p,f])=>[p,f]));
+const usados=new Set(); OBRAS.forEach(o=>(o.temas||[]).forEach(t=>usados.add(t)));
+function comTema(o,t){
+  const seus=o.temas||[];
+  return seus.includes(t) || (FILHOS[t]||[]).some(f=>seus.includes(f));
+}
+const ROTULO={disponivel:'Disponível', vendido:'Vendido/oferecido', nao_disponivel:'Não disponível'};
+const eur=v=>String(v).replace(/\B(?=(\d{3})+(?!\d))/g,' ')+' €';
+const esc=s=>String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+// uma obra sem titulo e sem titulo mesmo; para a identificar usa-se a referencia
+const nome=o=>o.titulo || 'Sem título';
+const designacao=o=>o.titulo ? '«'+o.titulo+'»'
+  : 'sem título, referência '+o.ref+(o.ano?', '+o.ano:'');
+
+function visiveis(){
+  return OBRAS.filter(o=>{
+    const e = fEstado==='todas' || (fEstado==='fora' ? o.estado!=='disponivel' : o.estado===fEstado);
+    const t = fTema==='todos' || comTema(o, fTema);
+    const u = fSub==='todos' || (o.temas || []).includes(fSub);
+    const m = fTec==='todas' || ((o._tec&&o._tec.meio)||[]).includes(fTec);
+    const sp = fTecSub==='todos' || (o._tec&&o._tec.suporte===fTecSub);
+    return e && t && u && m && sp;
+  });
+}
+function ligacaoPedido(o){
+  const assunto=encodeURIComponent('Pedido de informação — '+designacao(o));
+  const corpo=encodeURIComponent('Bom dia,\n\nTenho interesse na obra '+designacao(o)+' ('
+    +o.tecnica+(o.dimensoes?', '+o.dimensoes:'')+(o.ano?', '+o.ano:'')+')'
+    +(o.preco?', indicada a '+String(o.preco)+' €':'')+'.\n'
+    +'Agradeço que me informe sobre disponibilidade e condições de aquisição.\n\n'
+    +'Com os melhores cumprimentos,\n');
+  return 'mailto:'+ART.email+'?subject='+assunto+'&body='+corpo;
+}
+function cartao(o){
+  const foto=o._web?'<img loading="lazy" src="'+o._web.m+'" alt="'+esc(nome(o))+'">'
+                    :'<span class="semfoto">sem fotografia</span>';
+  const dir=o.estado==='disponivel'
+    ? '<span class="preco">'+(o.preco?eur(o.preco):'sob consulta')+'</span>'
+    : '<span class="selo">'+ROTULO[o.estado]+'</span>';
+  const pedido=o.estado==='disponivel'
+    ? '<a class="pedir" href="'+ligacaoPedido(o)+'">Pedir esta obra</a>'
+    : '<a class="pedir sec" href="'+ligacaoPedido(o)+'">Perguntar por esta obra</a>';
+  return '<article class="obra" data-ref="'+o.ref+'">'
+    +'<div class="moldura">'+foto+'</div><div class="corpo">'
+    +'<h3 class="tit'+(o.titulo?'':' st')+'">'+esc(nome(o))+'</h3>'
+    +'<p class="meta">'+esc(o.tecnica)+'</p>'
+    +'<p class="meta">'+esc(o.dimensoes||'')+(o.ano?' · '+o.ano:'')+'</p>'
+    +'<div class="rodape">'+dir+(o.estado==='disponivel'?'<span class="selo disp">Disponível</span>':'')
+    +'</div>'
+    +pedido
+    +(o.venda_link
+      ? '<a class="ondevenda" href="'+esc(o.venda_link)+'" target="_blank" rel="noopener">Comprar em '
+        +esc((o.venda_em&&o.venda_em[0])||'linha')+' →</a>'
+      : '')
+    +'</div></article>';
+}
+function pintar(){
+  const v=visiveis();
+  document.getElementById('grelha').innerHTML=v.map(cartao).join('');
+  const d=OBRAS.filter(o=>o.estado==='disponivel').length;
+  document.getElementById('contagem').textContent=
+    v.length+' obra'+(v.length===1?'':'s')+' a mostrar · '+d+' à venda de '
+    +OBRAS.length+' no catálogo';
+  document.querySelectorAll('.obra').forEach(c=>c.onclick=e=>{
+    if(e.target.closest('.pedir')) return;   // o pedido abre o email, não a ficha
+    abrir(c.dataset.ref);
+  });
+}
+function abrir(ref){
+  const o=OBRAS.find(x=>x.ref===ref); if(!o) return;
+  const ano=o.ano
+    ? (o.ano_fonte?o.ano+' (segundo a data da fotografia)':String(o.ano))
+    : (o.ano_publicacao?'não indicado (publicada em '+o.ano_publicacao+')':null);
+  const linhas=[['Ano',ano],['Técnica',o.tecnica],['Dimensões',o.dimensoes],
+                ['Tema',(o.temas||[]).join(' · ')],
+                ['À venda em',(o.venda_em||[]).join(' · ')],
+                ['Série',o.serie],['Estado',ROTULO[o.estado]],
+                ['Fotografia original',o.foto_original_px?o.foto_original_px+' px':null]];
+  if(o.estado!=='vendida') linhas.push(['Preço',o.preco?eur(o.preco):'sob consulta']);
+  const _janela=document.getElementById('jan');
+  _janela.innerHTML=
+    (o._web?'<div class="fotos"><img id="fotoGrande" src="'+(o._web.mais&&o._web.mais[0]?o._web.mais[0].g:o._web.g)+'" alt="'+esc(nome(o))+'">'
+            +((o._web.mais&&o._web.mais.length>1)
+              ?'<div class="tiras">'+o._web.mais.map((f,i)=>'<img class="tira'+(i?'':' sel')+'" src="'+f.m+'" data-g="'+f.g+'" alt="">').join('')+'</div>'
+              :'')+'</div>'
+           :'<div class="moldura"><span class="semfoto">sem fotografia</span></div>')
+    +'<div class="info"><h2'+(o.titulo?'':' class="st"')+'>'+esc(nome(o))+'</h2>'
+    +(o.titulo?'':'<p class="refobra">referência '+esc(o.ref)+'</p>')+'<dl>'
+    +linhas.filter(l=>l[1]).map(l=>'<dt>'+l[0]+'</dt><dd>'+esc(l[1])+'</dd>').join('')
+    +'</dl>'+(o.notas?'<p class="nota">'+esc(o.notas)+'</p>':'')
+    +(o.estado==='disponivel'
+      ? '<a class="cta" href="'+ligacaoPedido(o)+'">Pedir esta obra</a>'
+      : '<a class="cta sec" href="'+ligacaoPedido(o)+'">Perguntar por esta obra</a>')
+    +(o.venda_link
+      ? '<a class="cta sec" href="'+esc(o.venda_link)+'" target="_blank" rel="noopener">Comprar em '
+        +esc((o.venda_em&&o.venda_em[0])||'linha')+'</a>'
+      : '')
+    +'</div>';
+  _janela.querySelectorAll('.tira').forEach(t=>t.addEventListener('click',()=>{
+    const g=document.getElementById('fotoGrande');
+    if(g) g.src=t.dataset.g;
+    _janela.querySelectorAll('.tira').forEach(x=>x.classList.remove('sel'));
+    t.classList.add('sel');
+  }));
+  document.getElementById('lb').showModal();
+}
+function indice(){
+  const cols={};
+  OBRAS.forEach(o=>{const c=o.coleccao||'Outros';
+    cols[c]=cols[c]||{total:0,venda:0};
+    cols[c].total++; if(o.estado==='disponivel') cols[c].venda++;});
+  const ordem=Object.keys(cols).sort((a,b)=>cols[b].venda-cols[a].venda||a.localeCompare(b,'pt'));
+  document.getElementById('indiceLista').innerHTML=ordem.map(c=>
+    '<li><button data-col="'+esc(c)+'"><span>'+esc(c)+'</span><span class="qt">'
+    +(cols[c].venda?'<b>'+cols[c].venda+'</b> à venda · ':'')+cols[c].total+' obras</span></button></li>').join('');
+  document.querySelectorAll('#indiceLista button').forEach(b=>b.onclick=()=>{
+    fColeccao=b.dataset.col;
+    document.querySelectorAll('button.f[data-grupo="coleccao"]').forEach(x=>
+      x.setAttribute('aria-pressed', x.dataset.v===fColeccao?'true':'false'));
+    pintar();
+    document.getElementById('contagem').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+}
+function filtrosTema(){
+  const temPai = ARVORE.filter(([p,f]) => (usados.has(p) || f.some(x=>usados.has(x))) && p!=='Técnica');
+  if(!temPai.length) return;
+  const linha=document.getElementById('fTemaLinha'); linha.hidden=false;
+  document.getElementById('fTemaBotoes').innerHTML =
+    [['todos','Todos']].concat(temPai.map(([p])=>[p,p]))
+      .map(([v,r])=>'<button class="f" data-grupo="tema" data-v="'+esc(v)+'" aria-pressed="'
+        +(v===fTema?'true':'false')+'">'+esc(r)+'</button>').join('');
+  const subs=(FILHOS[fTema]||[]).filter(x=>usados.has(x));
+  const ls=document.getElementById('fSubLinha');
+  ls.hidden = subs.length===0;
+  document.getElementById('fSubRot').textContent='Dentro de '+fTema;
+  document.getElementById('fSubBotoes').innerHTML = subs.length
+    ? [['todos','Todos']].concat(subs.map(x=>[x,x]))
+        .map(([v,r])=>'<button class="f" data-grupo="sub" data-v="'+esc(v)+'" aria-pressed="'
+          +(v===fSub?'true':'false')+'">'+esc(r)+'</button>').join('')
+    : '';
+  ligarFiltros();
+}
+function filtrosTecnica(){
+  const meios=new Set(), sups=new Set();
+  OBRAS.forEach(o=>{ if(!o._tec) return;
+    (o._tec.meio||[]).forEach(m=>meios.add(m));
+    if(o._tec.suporte) sups.add(o._tec.suporte); });
+  const lm=document.getElementById('fTecLinha');
+  lm.hidden = meios.size===0;
+  document.getElementById('fTecBotoes').innerHTML =
+    [['todas','Todas']].concat([...meios].sort().map(m=>[m,m]))
+      .map(([v,r])=>'<button class="f" data-grupo="tec" data-v="'+esc(v)+'" aria-pressed="'
+        +(v===fTec?'true':'false')+'">'+esc(r)+'</button>').join('');
+  // o «sobre» so faz sentido quando ha mais do que um suporte entre o que se ve
+  const vis=new Set();
+  OBRAS.forEach(o=>{ if(o._tec&&o._tec.suporte&&(fTec==='todas'||(o._tec.meio||[]).includes(fTec)))
+    vis.add(o._tec.suporte); });
+  const ls=document.getElementById('fTecSubLinha');
+  ls.hidden = vis.size<2;
+  document.getElementById('fTecSubBotoes').innerHTML = vis.size>1
+    ? [['todos','Todos']].concat([...vis].sort().map(x=>[x,x]))
+        .map(([v,r])=>'<button class="f" data-grupo="tecsub" data-v="'+esc(v)+'" aria-pressed="'
+          +(v===fTecSub?'true':'false')+'">'+esc(r)+'</button>').join('')
+    : '';
+  ligarFiltros();
+}
+function ligarFiltros(){
+document.querySelectorAll('button.f').forEach(b=>b.onclick=()=>{
+  const g=b.dataset.grupo;
+  document.querySelectorAll('button.f[data-grupo="'+g+'"]').forEach(x=>x.setAttribute('aria-pressed','false'));
+  b.setAttribute('aria-pressed','true');
+  if(g==='estado') fEstado=b.dataset.v;
+  else if(g==='tema'){ fTema=b.dataset.v; fSub='todos'; filtrosTema(); }
+  else if(g==='sub') fSub=b.dataset.v;
+  else if(g==='tec'){ fTec=b.dataset.v; fTecSub='todos'; filtrosTecnica(); }
+  else if(g==='tecsub') fTecSub=b.dataset.v;
+  pintar();
+});
+}
+ligarFiltros();
+filtrosTema();
+filtrosTecnica();
+document.getElementById('fechar').onclick=()=>document.getElementById('lb').close();
+document.getElementById('lb').addEventListener('click',e=>{if(e.target.id==='lb')e.target.close()});
+pintar();
+</script>
+</body></html>
