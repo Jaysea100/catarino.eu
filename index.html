@@ -193,11 +193,24 @@ function cartao(o){
     +'<div class="rodape">'+dir+(o.estado==='disponivel'?'<span class="selo disp">Disponível</span>':'')
     +'</div>'
     +pedido
-    +(o.venda_link
-      ? '<a class="ondevenda" href="'+esc(o.venda_link)+'" target="_blank" rel="noopener">Comprar em '
-        +esc((o.venda_em&&o.venda_em[0])||'linha')+' →</a>'
-      : '')
+    +botaoVenda(o,'ondevenda')
     +'</div></article>';
+}
+function plataforma(u){
+  // o nome tem de ser o do sitio para onde a ligacao vai mesmo
+  const m=/^https?:\/\/(?:www\.)?([^\/]+)/i.exec(u||'');
+  if(!m) return null;
+  const h=m[1].toLowerCase();
+  if(h.indexOf('artbid')>=0) return 'Artbid';
+  if(h.indexOf('saatchiart')>=0) return 'Saatchi Art';
+  return h;
+}
+function botaoVenda(o,classe){
+  const nomeP=plataforma(o.venda_link);
+  if(nomeP) return '<a class="'+classe+'" href="'+esc(o.venda_link)
+    +'" target="_blank" rel="noopener">Comprar em '+esc(nomeP)+' →</a>';
+  // sem endereco (ex.: lote ainda em avaliacao): e informacao, nao ligacao
+  return o.venda_link ? '<p class="nota">'+esc(o.venda_link)+'</p>' : '';
 }
 function pintar(){
   const v=visiveis();
@@ -236,10 +249,7 @@ function abrir(ref){
     +(o.estado==='disponivel'
       ? '<a class="cta" href="'+ligacaoPedido(o)+'">Pedir esta obra</a>'
       : '<a class="cta sec" href="'+ligacaoPedido(o)+'">Perguntar por esta obra</a>')
-    +(o.venda_link
-      ? '<a class="cta sec" href="'+esc(o.venda_link)+'" target="_blank" rel="noopener">Comprar em '
-        +esc((o.venda_em&&o.venda_em[0])||'linha')+'</a>'
-      : '')
+    +botaoVenda(o,'cta sec')
     +'</div>';
   _janela.querySelectorAll('.tira').forEach(t=>t.addEventListener('click',()=>{
     const g=document.getElementById('fotoGrande');
